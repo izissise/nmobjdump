@@ -5,7 +5,7 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Mon Feb 24 14:20:45 2014 Hugues
+## Last update Mon Feb 24 14:53:13 2014 Hugues
 ##
 
 SRCNM		=	nm/main.c
@@ -44,19 +44,19 @@ $(OBJDIR)%.o:		$(patsubst %.c,${SRCDIR}%.c, %.c)
 $(NM):	$(OBJNM)
 	@echo -e "Linking $@ { $(LDFLAGS) }" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
-	@$(CC) $(LDFLAGS) -o $(NAME) $(OBJNM)
+	@$(CC) $(LDFLAGS) -o $(NM) $(OBJNM)
 
 $(OBJDUMP):	$(OBJOBJDUMP)
 		@echo -e "Linking $@ { $(LDFLAGS) }" | sed 's/^-e //' \
 		| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
-		@$(CC) $(LDFLAGS) -o $(NAME) $(OBJOBJDUMP)
+		@$(CC) $(LDFLAGS) -o $(OBJDUMP) $(OBJOBJDUMP)
 
 all:	$(NM) $(OBJDUMP)
 
 clean:
 	@echo -e "Removing object !" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[35m&\x1B[0m/g'
-	@$(RM) $(OBJ)
+	@$(RM) $(OBJDUMP) $(OBJNM)
 
 fclean:	clean
 	@echo -e "Removing ${NAME} !" | sed 's/^-e //' \
