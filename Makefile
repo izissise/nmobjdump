@@ -27,7 +27,7 @@ CFLAGS		+=	-Wall -Wextra
 LDFLAGS		+=
 
 OBJNM		=	$(patsubst %.c,${OBJDIR}%.o, $(SRCNM))
-OBJOBJDUMP	=       $(patsubst %.c,${OBJDIR}%.o, $(SRCOBJDUMP))
+OBJOBJDUMP	=	$(patsubst %.c,${OBJDIR}%.o, $(SRCOBJDUMP))
 
 dummy		:=	$(shell test -d $(OBJDIR) || mkdir -p $(OBJDIR))
 dummy		:=	$(shell test -d $(SRCDIR) || mkdir -p $(SRCDIR))
