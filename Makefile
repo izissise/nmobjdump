@@ -10,7 +10,8 @@
 
 SRC			=	file.c \
 				dereference.c \
-				section64.c
+				section64.c \
+				elf.c
 
 SRCNM		=	nm/main.c
 

@@ -26,14 +26,16 @@ int		filesize(t_file *file)
 
 int	open_file(t_file *file, const char *name, int flags, mode_t mode)
 {
+  int	mapright;
+
   file->data = NULL;
   file->mode = mode;
   file->name = name;
   file->flags = flags;
-  if ((flags & O_CREAT) || (flags & O_CREAT))
-    file->fd = open(name, flags, mode);
-  else
-    file->fd = open(name, flags);
+  mapright = ((flags == O_RDONLY) ? PROT_READ : (flags == O_WRONLY) ?
+              PROT_WRITE : (flags == O_RDWR) ? PROT_WRITE | PROT_READ : 0);
+  file->fd = ((flags & O_CREAT) == O_CREAT) ? open(name, flags, mode)
+             : open(name, flags);
   if (file->fd == -1)
     {
       perror(file->name);
@@ -41,8 +43,8 @@ int	open_file(t_file *file, const char *name, int flags, mode_t mode)
     }
   if (filesize(file) == -1)
     return (-1);
-  if ((file->data = mmap(NULL, file->size, /*tmp*/ PROT_READ,
-                         MAP_PRIVATE, file->fd, 0)) == MAP_FAILED)
+  if ((file->data = mmap(NULL, file->size, mapright,
+                         MAP_SHARED, file->fd, 0)) == MAP_FAILED)
     {
       perror(file->name);
       close(file->fd);
