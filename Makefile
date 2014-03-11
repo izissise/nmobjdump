@@ -5,32 +5,44 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Mon Feb 24 14:53:13 2014 Hugues
+## Last update Tue Mar 11 14:30:11 2014 Hugues
 ##
+
+SRC			=	file.c \
+				dereference.c \
+				section64.c
 
 SRCNM		=	nm/main.c
 
 SRCOBJDUMP	=	objdump/main.c
 
+SRCNM		+= $(SRC)
+SRCOBJDUMP	+= $(SRC)
+
 CC		=	gcc
 
 RM		=	rm -f
 
-NM  		=	my_nm
+NM		=	my_nm
 OBJDUMP		=	my_objdump
 
 OBJDIR		=	obj/
 SRCDIR		=	src/
+INCDIR		=	inc/
 
-CFLAGS		+=	-Wall -Wextra
+CFLAGS		+=	-I$(INCDIR)
+CFLAGS		+=	-Wall -Wextra -Winit-self
+CFLAGS		+=	-Wunused-function -pipe -Winit-self
 
-LDFLAGS		+=
+LDFLAGS		+=	-Wl,-O1
 
 OBJNM		=	$(patsubst %.c,${OBJDIR}%.o, $(SRCNM))
 OBJOBJDUMP	=	$(patsubst %.c,${OBJDIR}%.o, $(SRCOBJDUMP))
 
 dummy		:=	$(shell test -d $(OBJDIR) || mkdir -p $(OBJDIR))
 dummy		:=	$(shell test -d $(SRCDIR) || mkdir -p $(SRCDIR))
+dummy		:=	$(shell test -d $(INCDIR) || mkdir -p $(INCDIR))
+
 
 $(OBJDIR)%.o:		$(patsubst %.c,${SRCDIR}%.c, %.c)
 			@if [ ! -d $(dir $@) ]; then mkdir -p $(dir $@); fi
@@ -59,9 +71,9 @@ clean:
 	@$(RM) $(OBJDUMP) $(OBJNM)
 
 fclean:	clean
-	@echo -e "Removing ${NAME} !" | sed 's/^-e //' \
+	@echo -e "Removing ${NM} ${OBJDUMP} !" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[36m&\x1B[0m/g'
-	@$(RM) $(NAME)
+	@$(RM) $(NM) $(OBJDUMP)
 	@$(RM) $(SYMLINK)
 
 re:	fclean all
