@@ -31,7 +31,7 @@ OBJDIR		=	obj/
 SRCDIR		=	src/
 INCDIR		=	inc/
 
-CFLAGS		+=	-I$(INCDIR)
+CFLAGS		+=	-I$(INCDIR) -g
 CFLAGS		+=	-Wall -Wextra -Winit-self
 CFLAGS		+=	-Wunused-function -pipe -Winit-self
 
