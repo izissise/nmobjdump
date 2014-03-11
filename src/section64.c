@@ -14,7 +14,7 @@ Elf64_Shdr	*get_section_table(Elf64_Ehdr *elf, t_file *file)
 {
   Elf64_Shdr	*shtable;
 
-  shtable = deref(file->data + elf->e_shoff, file);
+  shtable = ((size_t)file->data) + deref(&(elf->e_shoff), file);
   return (shtable);
 }
 
@@ -53,7 +53,7 @@ void	print_sh_name(Elf64_Ehdr *elf, t_file *file)
   i = 0;
   shtable = get_section_table(elf, file);
   shstr = &(shtable[elf->e_shstrndx]);
-  sectionnames = deref(file->data + shstr->sh_offset, file);
+  sectionnames = ((size_t)file->data) + deref(&(shstr->sh_offset), file);
   while (i < elf->e_shnum)
     {
       printf("%d %s\n", i, &(sectionnames[shtable[i].sh_name]));
