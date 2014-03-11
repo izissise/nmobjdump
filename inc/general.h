@@ -11,6 +11,8 @@
 #ifndef GENERAL_H_INCLUDED
 # define GENERAL_H_INCLUDED
 
+# include <elf.h>
+
 # include "file.h"
 
 void	*deref(void *addr, t_file *file);
