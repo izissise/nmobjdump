@@ -10,7 +10,7 @@
 
 #include "general.h"
 
-Elf64_Shdr	*get_section_table(Elf64_Ehdr *elf, t_file *file)
+Elf64_Shdr	*get_section_table64(Elf64_Ehdr *elf, t_file *file)
 {
   Elf64_Shdr	*shtable;
 
@@ -43,7 +43,7 @@ Elf64_Shdr	*get_section_table(Elf64_Ehdr *elf, t_file *file)
                                  reference the section header table.  That is, the section header table does not contain entries for the reserved indices.
                                  */
 
-void	print_sh_name(Elf64_Ehdr *elf, t_file *file)
+void	print_sh_name64(Elf64_Ehdr *elf, t_file *file)
 {
   Elf64_Shdr	*shtable;
   Elf64_Shdr	*shstr;
@@ -51,7 +51,7 @@ void	print_sh_name(Elf64_Ehdr *elf, t_file *file)
   int		i;
 
   i = 0;
-  shtable = get_section_table(elf, file);
+  shtable = get_section_table64(elf, file);
   shstr = &(shtable[elf->e_shstrndx]);
   sectionnames = ((size_t)file->data) + deref(&(shstr->sh_offset), file);
   while (i < elf->e_shnum)

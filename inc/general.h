@@ -19,6 +19,7 @@
 void	*deref(void *addr, t_file *file);
 int	check_valid_elf(t_file *file);
 
-void	print_sh_name(Elf64_Ehdr *elf, t_file *file);
+Elf64_Shdr	*get_section_table64(Elf64_Ehdr *elf, t_file *file);
+void	print_sh_name64(Elf64_Ehdr *elf, t_file *file);
 
 #endif /* !GENERAL_H_INCLUDED */
