@@ -25,14 +25,14 @@ size_t	section_number64(Elf64_Ehdr *elf)
 
 void	print_elf_info64(Elf64_Ehdr *elf)
 {
-  char	*arch_name[20];
+  char	*arch_name[EM_NUM];
 
-  memset(arch_name, 0, 19 * sizeof(char*));
-  arch_name[EM_386] = "i386";
+  memset(arch_name, 0, EM_NUM * sizeof(char*));
+  arch_name[EM_386] = "x86";
   arch_name[EM_ARM] = "arm";
   arch_name[EM_PPC] = "powerpc";
   arch_name[EM_SPARC] = "sparc";
-  arch_name[EM_X86_64] = "amd64";
+  arch_name[EM_X86_64] = "x86-64";
   printf("architecture: %s, flags 0x%08x:\n",
          arch_name[elf->e_machine] != NULL ?
          arch_name[elf->e_machine] : "unknow", elf->e_flags);
