@@ -5,7 +5,7 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Thu Mar 13 00:21:32 2014 Hugues
+## Last update Thu Mar 13 00:35:37 2014 Hugues
 ##
 
 SRC			=	file.c \
@@ -20,8 +20,8 @@ SRCOBJDUMP	=	objdump/main.c \
 			objdump/dump.c \
 			objdump/display_info.c
 
-SRCNM		+= $(SRC)
-SRCOBJDUMP	+= $(SRC)
+SRCNM		+=	$(SRC)
+SRCOBJDUMP	+=	$(SRC)
 
 CC		=	gcc
 
@@ -29,7 +29,6 @@ RM		=	rm -f
 
 NM		=	my_nm
 OBJDUMP		=	my_objdump
-NAME		=	nm/objdump
 
 OBJDIR		=	obj/
 SRCDIR		=	src/
@@ -68,9 +67,7 @@ $(OBJDUMP):	$(OBJOBJDUMP)
 		| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
 		@$(CC) $(LDFLAGS) -o $(OBJDUMP) $(OBJOBJDUMP)
 
-$(NAME):	$(NM) $(OBJDUMP)
-
-all:	$(NAME)
+all:	$(OBJDUMP)
 
 clean:
 	@echo -e "Removing object !" | sed 's/^-e //' \
@@ -87,5 +84,5 @@ re:	fclean all
 help:
 	@echo -e "\033[37mTarget available: all, ${NAME}, clean, fclean\033[00m" | sed 's/^-e //'
 
-.PHONY:	all clean fclean re help $(NM) $(OBJDUMP) $(NAME)
+.PHONY:	all clean fclean re help $(NM) $(OBJDUMP)
 
