@@ -5,7 +5,7 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Tue Mar 11 14:30:11 2014 Hugues
+## Last update Thu Mar 13 00:21:32 2014 Hugues
 ##
 
 SRC			=	file.c \
@@ -17,8 +17,8 @@ SRC			=	file.c \
 SRCNM		=	nm/main.c
 
 SRCOBJDUMP	=	objdump/main.c \
-				objdump/dump.c \
-				objdump/display_info.c
+			objdump/dump.c \
+			objdump/display_info.c
 
 SRCNM		+= $(SRC)
 SRCOBJDUMP	+= $(SRC)
@@ -29,6 +29,7 @@ RM		=	rm -f
 
 NM		=	my_nm
 OBJDUMP		=	my_objdump
+NAME		=	nm/objdump
 
 OBJDIR		=	obj/
 SRCDIR		=	src/
@@ -67,23 +68,24 @@ $(OBJDUMP):	$(OBJOBJDUMP)
 		| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
 		@$(CC) $(LDFLAGS) -o $(OBJDUMP) $(OBJOBJDUMP)
 
-all:	$(NM) $(OBJDUMP)
+$(NAME):	$(NM) $(OBJDUMP)
+
+all:	$(NAME)
 
 clean:
 	@echo -e "Removing object !" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[35m&\x1B[0m/g'
-	@$(RM) $(OBJDUMP) $(OBJNM)
+	@$(RM) $(OBJOBJDUMP) $(OBJNM)
 
 fclean:	clean
 	@echo -e "Removing ${NM} ${OBJDUMP} !" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[36m&\x1B[0m/g'
 	@$(RM) $(NM) $(OBJDUMP)
-	@$(RM) $(SYMLINK)
 
 re:	fclean all
 
 help:
 	@echo -e "\033[37mTarget available: all, ${NAME}, clean, fclean\033[00m" | sed 's/^-e //'
 
-.PHONY:	all clean fclean re help
+.PHONY:	all clean fclean re help $(NM) $(OBJDUMP) $(NAME)
 
