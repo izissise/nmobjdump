@@ -30,6 +30,7 @@ struct	s_elf
   size_t	(*sh_offset)();
   size_t	(*sh_size)();
   size_t	(*sh_addr)();
+  char	*(*sh_section_name)();
 };
 
 void	*deref(void *addr, t_file *file);
@@ -42,6 +43,7 @@ size_t		section_number64(Elf64_Ehdr *elf);
 size_t		sh_offset64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_size64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_addr64(Elf64_Ehdr *elf, int idx, t_file *file);
+char			*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file);
 
 void			print_sh_name64(Elf64_Ehdr *elf, t_file *file);
 

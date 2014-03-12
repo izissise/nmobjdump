@@ -22,10 +22,11 @@ int		main(int ac, char **av)
       while (i < section_number)
         {
           tmp = file.data + elf.sh_offset(elf.elf, i, &file);
+          printf("Contents of section %s:\n",
+                 elf.sh_section_name(elf.elf, i, &file));
           if (tmp + elf.sh_size(elf.elf, i, &file) <= file.data + file.size)
             dump_mem(tmp, elf.sh_size(elf.elf, i, &file),
                      elf.sh_addr(elf.elf, i, &file));
-          printf("\n");
           i++;
         }
       close_file(&file);
