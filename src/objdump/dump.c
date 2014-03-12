@@ -10,26 +10,24 @@
 
 #include "objdump.h"
 
-void			dump_line(void *addr, int size)
+void	dump_line(unsigned char *addr, int size)
 {
-  int			j;
-  int			i;
-  int			k;
-  unsigned char	*tmp;
-  char			ascii[BYTE_LINE + 1];
-  char			res[8 * (BYTE_LINE + 1)];
+  int	j;
+  int	i;
+  int	k;
+  char	ascii[BYTE_LINE + 1];
+  char	res[4 * (BYTE_LINE + 1)];
 
   j = 0;
   k = 0;
-  tmp = addr;
   memset(ascii, 0, BYTE_LINE + 1);
-  while (j < size + ((size % 4) > 0 ? 4 : 0))
+  while (j < (size))
     {
       i = 0;
-      while (i < ((j >= size) ? (4 - (size % 4)) : 4))
+      while ((i < 4) && (i + j < size))
         {
-          ascii[j + i] = isprint(tmp[j + i]) ? tmp[j + i] : '.';
-          sprintf(&(res[k]), "%02x ", tmp[i + j]);
+          ascii[j + i] = isprint(addr[j + i]) ? addr[j + i] : '.';
+          sprintf(&(res[k]), "%02x ", addr[i + j]);
           i++;
           k += 2;
         }
@@ -51,8 +49,8 @@ void	dump_mem(void *addr, int size, size_t disp_addr)
   while (i < lines)
     {
       printf(" %04lx ", disp_addr + (i * BYTE_LINE));
-      dump_line(addr + (i * BYTE_LINE),
-                (i >= div) ? (BYTE_LINE - (size % BYTE_LINE)) : BYTE_LINE);
+      dump_line((unsigned char*)(addr + (i * BYTE_LINE)),
+                (i >= div) ? (size % BYTE_LINE) : BYTE_LINE);
       printf("\n");
       i++;
     }

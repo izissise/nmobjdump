@@ -23,6 +23,7 @@ int		main(int ac, char **av)
         {
           tmp = file.data + shtable[i].sh_offset;
           dump_mem(tmp, shtable[i].sh_size, shtable[i].sh_addr);
+          printf("\n");
           i++;
         }
       close_file(&file);
