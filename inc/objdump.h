@@ -19,5 +19,7 @@
 
 void	display_section(t_elf *elf, t_file *file, int i);
 void	dump_mem(void *addr, int size, size_t disp_addr);
+int	display_file(const char *file);
+void	display_file_flags(t_elf *elf, t_file *file);
 
 #endif /* !OBJDUMP_H_INCLUDED */
