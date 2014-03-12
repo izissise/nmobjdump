@@ -13,6 +13,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <elf.h>
 # include "file.h"
 
@@ -31,6 +32,7 @@ struct	s_elf
   size_t	(*sh_size)();
   size_t	(*sh_addr)();
   char	*(*sh_section_name)();
+  void	(*print_elf_info)();
 };
 
 void	*deref(void *addr, t_file *file);
@@ -44,6 +46,7 @@ size_t		sh_offset64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_size64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_addr64(Elf64_Ehdr *elf, int idx, t_file *file);
 char			*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file);
+void			print_elf_info64(Elf64_Ehdr *elf);
 
 void			print_sh_name64(Elf64_Ehdr *elf, t_file *file);
 

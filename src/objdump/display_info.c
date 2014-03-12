@@ -42,6 +42,7 @@ int	display_file(const char *filename)
 void	display_file_flags(t_elf *elf, t_file *file)
 {
   printf("%s:     file format %s\n", file->name, "elf64-x86-64");
+  elf->print_elf_info(elf->elf);
 }
 
 void	display_section(t_elf *elf, t_file *file, int i)

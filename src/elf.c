@@ -42,5 +42,6 @@ int	init_elf(t_elf *elf, t_file *file)
   elf->sh_size = IS_32(NULL, &sh_size64);
   elf->sh_addr = IS_32(NULL, &sh_addr64);
   elf->sh_section_name = IS_32(NULL, &sh_section_name64);
+  elf->print_elf_info = IS_32(NULL, &print_elf_info64);
   return (0);
 }

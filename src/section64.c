@@ -23,6 +23,22 @@ size_t	section_number64(Elf64_Ehdr *elf)
   return (elf->e_shnum);
 }
 
+void	print_elf_info64(Elf64_Ehdr *elf)
+{
+  char	*arch_name[20];
+
+  memset(arch_name, 0, 19 * sizeof(char*));
+  arch_name[EM_386] = "i386";
+  arch_name[EM_ARM] = "arm";
+  arch_name[EM_PPC] = "powerpc";
+  arch_name[EM_SPARC] = "sparc";
+  arch_name[EM_X86_64] = "amd64";
+  printf("architecture: %s, flags 0x%08x:\n",
+         arch_name[elf->e_machine] != NULL ?
+         arch_name[elf->e_machine] : "unknow", elf->e_flags);
+  printf("start address 0x%016lx\n", elf->e_entry);
+}
+
 
 /* e_shstrndx  This member holds the section header table index of the entry associated with the section name string table.  If the file has no section name string table,
                    this member holds the value SHN_UNDEF.
