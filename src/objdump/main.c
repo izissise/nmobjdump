@@ -3,26 +3,28 @@
 int		main(int ac, char **av)
 {
   t_file		file;
-  Elf64_Ehdr	*elf;
-  Elf64_Shdr	*shtable;
+  t_elf		elf;
+  size_t		section_number;
 
-  int i = 0;
+  unsigned int i = 0;
   void	*tmp;
 
   if (ac == 2)
     {
       if (open_file(&file, av[1], O_RDONLY, 0) == -1)
         return (1);
-      if (check_valid_elf(&file) == 1)
+      if (check_valid_elf(&file) || init_elf(&elf, &file))
         return (1);
-      elf = file.data;
-      print_sh_name64(elf, &file);
+      elf.elf = file.data;
+      print_sh_name64(elf.elf, &file);
 
-      shtable = get_section_table64(elf, &file);
-      while (i < elf->e_shnum)
+      section_number = elf.section_number(elf.elf);
+      while (i < section_number)
         {
-          tmp = file.data + shtable[i].sh_offset;
-          dump_mem(tmp, shtable[i].sh_size, shtable[i].sh_addr);
+          tmp = file.data + elf.sh_offset(elf.elf, i, &file);
+          if (tmp + elf.sh_size(elf.elf, i, &file) <= file.data + file.size)
+            dump_mem(tmp, elf.sh_size(elf.elf, i, &file),
+                     elf.sh_addr(elf.elf, i, &file));
           printf("\n");
           i++;
         }

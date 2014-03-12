@@ -29,3 +29,17 @@ int			check_valid_elf(t_file *file)
     }
   return (0);
 }
+
+int	init_elf(t_elf *elf, t_file *file)
+{
+  elf->elf = file->data;
+  elf->type = ((Elf32_Ehdr*)(elf->elf))->e_ident[EI_CLASS];
+  if (!((elf->type == ELFCLASS32) || (elf->type == ELFCLASS64)))
+    return (1);
+  elf->get_section_table =  IS_32(NULL, &get_section_table64);
+  elf->section_number =  IS_32(NULL, &section_number64);
+  elf->sh_offset =  IS_32(NULL, &sh_offset64);
+  elf->sh_size =  IS_32(NULL, &sh_size64);
+  elf->sh_addr =  IS_32(NULL, &sh_addr64);
+  return (0);
+}

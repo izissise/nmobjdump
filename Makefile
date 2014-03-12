@@ -11,6 +11,7 @@
 SRC			=	file.c \
 				dereference.c \
 				section64.c \
+				section_spec64.c \
 				elf.c
 
 SRCNM		=	nm/main.c

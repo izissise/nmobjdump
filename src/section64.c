@@ -10,13 +10,19 @@
 
 #include "general.h"
 
-Elf64_Shdr	*get_section_table64(Elf64_Ehdr *elf, t_file *file)
+void	*get_section_table64(Elf64_Ehdr *elf, t_file *file)
 {
   Elf64_Shdr	*shtable;
 
   shtable = ((size_t)file->data) + deref(&(elf->e_shoff), file);
   return (shtable);
 }
+
+size_t	section_number64(Elf64_Ehdr *elf)
+{
+  return (elf->e_shnum);
+}
+
 
 /* e_shstrndx  This member holds the section header table index of the entry associated with the section name string table.  If the file has no section name string table,
                    this member holds the value SHN_UNDEF.
