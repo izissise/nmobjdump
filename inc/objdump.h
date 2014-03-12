@@ -17,6 +17,7 @@
 
 # define BYTE_LINE 16
 
+void	display_section(t_elf *elf, t_file *file, int i);
 void	dump_mem(void *addr, int size, size_t disp_addr);
 
 #endif /* !OBJDUMP_H_INCLUDED */

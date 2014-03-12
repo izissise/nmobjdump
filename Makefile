@@ -17,7 +17,8 @@ SRC			=	file.c \
 SRCNM		=	nm/main.c
 
 SRCOBJDUMP	=	objdump/main.c \
-				objdump/dump.c
+				objdump/dump.c \
+				objdump/display_info.c
 
 SRCNM		+= $(SRC)
 SRCOBJDUMP	+= $(SRC)

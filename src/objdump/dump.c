@@ -34,7 +34,7 @@ void	dump_line(unsigned char *addr, int size)
       k++;
       j += 4;
     }
-  printf("%-36s %s", res, ascii);
+  printf("%-36s %-16s", res, ascii);
 }
 
 void	dump_mem(void *addr, int size, size_t disp_addr)

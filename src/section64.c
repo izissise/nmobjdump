@@ -48,21 +48,3 @@ size_t	section_number64(Elf64_Ehdr *elf)
                    SHN_HIRESERVE This  value  specifies the upper bound of the range of reserved indices between SHN_LORESERVE and SHN_HIRESERVE, inclusive; the values do not
                                  reference the section header table.  That is, the section header table does not contain entries for the reserved indices.
                                  */
-
-void	print_sh_name64(Elf64_Ehdr *elf, t_file *file)
-{
-  Elf64_Shdr	*shtable;
-  Elf64_Shdr	*shstr;
-  char		*sectionnames;
-  int		i;
-
-  i = 0;
-  shtable = get_section_table64(elf, file);
-  shstr = &(shtable[elf->e_shstrndx]);
-  sectionnames = ((size_t)file->data) + deref(&(shstr->sh_offset), file);
-  while (i < elf->e_shnum)
-    {
-      printf("%d %s\n", i, &(sectionnames[shtable[i].sh_name]));
-      i++;
-    }
-}
