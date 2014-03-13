@@ -10,38 +10,26 @@
 
 #include "nm.h"
 
-char		*symbol_section_name(t_elf *elf)
-{
-  char		*names[ET_NUM];
-  Elf32_Ehdr	*tmpelf;
-
-  tmpelf = (Elf32_Ehdr*)elf->elf;
-  names[ET_NONE] = NULL;
-  names[ET_REL] = ".symtab";
-  names[ET_EXEC] = ".dynsym";
-  names[ET_DYN] = ".dynsym";
-  names[ET_CORE] = NULL;
-  if (tmpelf->e_type < ET_NUM)
-    return (names[tmpelf->e_type]);
-  return (NULL);
-}
-
 int	display_file(const char *filename)
 {
   t_file	file;
   t_elf	elf;
   int	sym;
+  Elf64_Shdr *tab;
+  Elf64_Sym *tmp;
 
   if ((open_file(&file, filename, O_RDONLY, 0) == -1)
       || check_valid_elf(&file) || init_elf(&elf, &file))
     return (1);
   elf.elf = file.data;
-  if ((sym = find_section(&elf, symbol_section_name(&elf), &file)) == -1
-      || elf.sh_size(elf.elf, sym, &file) == 0)
+  sym = find_section(&elf, ".symtab", &file);
+  if ((sym = (sym == -1) ? find_section(&elf, ".dynsym", &file) : sym) == -1)
     {
       dprintf(STDERR_FILENO, "%s: no symbols\n", filename);
       return (1);
     }
-
+  tab = get_section_table64(elf.elf, &file);
+  tmp = file.data + tab[sym].sh_offset;
+  printf("%d\n", tmp[1].st_name);
   return (close_file(&file));
 }
