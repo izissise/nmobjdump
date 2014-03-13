@@ -5,7 +5,7 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Thu Mar 13 13:45:29 2014 Hugues
+## Last update Fri Mar 14 00:11:31 2014 Hugues
 ##
 
 SRC			=	file.c \
@@ -52,7 +52,6 @@ dummy		:=	$(shell test -d $(OBJDIR) || mkdir -p $(OBJDIR))
 dummy		:=	$(shell test -d $(SRCDIR) || mkdir -p $(SRCDIR))
 dummy		:=	$(shell test -d $(INCDIR) || mkdir -p $(INCDIR))
 
-
 $(OBJDIR)%.o:		$(patsubst %.c,${SRCDIR}%.c, %.c)
 			@if [ ! -d $(dir $@) ]; then mkdir -p $(dir $@); fi
 			@echo -e "Compiling $< { $(CFLAGS) }" | sed 's/^-e //' \
@@ -62,17 +61,17 @@ $(OBJDIR)%.o:		$(patsubst %.c,${SRCDIR}%.c, %.c)
 			| sed 's/[─┬─├─└│]/\x1B[35m&\x1B[0m/g'
 			@$(CC) $(CFLAGS) -c $< -o $@
 
+all:	$(OBJDUMP) $(NM)
+
+$(OBJDUMP):	$(OBJOBJDUMP)
+	@echo -e "Linking $@ { $(LDFLAGS) }" | sed 's/^-e //' \
+	| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
+	@$(CC) $(LDFLAGS) -o $(OBJDUMP) $(OBJOBJDUMP)
+
 $(NM):	$(OBJNM)
 	@echo -e "Linking $@ { $(LDFLAGS) }" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
 	@$(CC) $(LDFLAGS) -o $(NM) $(OBJNM)
-
-$(OBJDUMP):	$(OBJOBJDUMP)
-		@echo -e "Linking $@ { $(LDFLAGS) }" | sed 's/^-e //' \
-		| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
-		@$(CC) $(LDFLAGS) -o $(OBJDUMP) $(OBJOBJDUMP)
-
-all:	$(OBJDUMP) $(NM)
 
 clean:
 	@echo -e "Removing object !" | sed 's/^-e //' \
@@ -87,7 +86,8 @@ fclean:	clean
 re:	fclean all
 
 help:
-	@echo -e "\033[37mTarget available: all, ${NAME}, clean, fclean\033[00m" | sed 's/^-e //'
+	@echo -e "\033[37mTarget available: all, clean, fclean\033[00m" \
+	| sed 's/^-e //'
 
-.PHONY:	all clean fclean re help $(NM) $(OBJDUMP)
+.PHONY:	all clean fclean re help
 
