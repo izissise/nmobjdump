@@ -10,11 +10,6 @@
 
 #include "nm.h"
 
-void	display_file(const char *filename)
-{
-  (void)filename;
-}
-
 int	main(int ac, char **av)
 {
   int	i;
@@ -22,6 +17,8 @@ int	main(int ac, char **av)
   i = 1;
   while (i < ac)
     {
+      if (ac > 2)
+        printf("\n%s:\n", av[i]);
       display_file(av[i]);
       i++;
     }

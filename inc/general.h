@@ -38,6 +38,7 @@ struct	s_elf
 void	*deref(void *addr, t_file *file);
 int	check_valid_elf(t_file *file);
 int	init_elf(t_elf *elf, t_file *file);
+int	find_section(t_elf *elf, const char *section, t_file *file);
 
 void			*get_section_table64(Elf64_Ehdr *elf, t_file *file);
 size_t		section_number64(Elf64_Ehdr *elf);

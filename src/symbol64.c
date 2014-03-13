@@ -8,11 +8,4 @@
 ** Last update Mon Oct  8 16:20:21 2012 hugues morisset
 */
 
-#ifndef NM_H_INCLUDED
-# define NM_H_INCLUDED
-
-# include "general.h"
-
-int	display_file(const char *file);;
-
-#endif /* !NM_H_INCLUDED */
+#include "general.h"

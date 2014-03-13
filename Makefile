@@ -14,9 +14,12 @@ SRC			=	file.c \
 				section32.c \
 				section_spec64.c \
 				section_spec32.c \
+				section_search.c \
+				symbol64.c \
 				elf.c
 
-SRCNM		=	nm/main.c
+SRCNM		=	nm/main.c \
+			nm/display_info.c
 
 SRCOBJDUMP	=	objdump/main.c \
 			objdump/dump.c \
