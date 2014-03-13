@@ -17,7 +17,6 @@ int	section_worth_display(char *name)
         || !strcmp(name, ".symtab")
         || !strcmp(name, ".strtab")
         || !strcmp(name, ".rela.text")
-        || !strcmp(name, ".data")
         || !strcmp(name, ".rela.debug_info")
         || !strcmp(name, ".rela.debug_aranges")
         || !strcmp(name, ".note.GNU-stack")
@@ -67,13 +66,15 @@ void	display_section(t_elf *elf, t_file *file, int i)
 {
   void	*tmp;
   char	*name;
+  size_t	size;
 
-  if ((name =  elf->sh_section_name(elf->elf, i, file)) == NULL)
+  size = elf->sh_size(elf->elf, i, file);
+  name = elf->sh_section_name(elf->elf, i, file);
+  if ((name == NULL) || (size == 0))
     return ;
   tmp = file->data + elf->sh_offset(elf->elf, i, file);
   printf("Contents of section %s:\n", name);
-  if (tmp + elf->sh_size(elf->elf, i, file) <= file->data + file->size)
-    dump_mem(tmp, elf->sh_size(elf->elf, i, file),
-             elf->sh_addr(elf->elf, i, file));
+  if (tmp + size <= file->data + file->size)
+    dump_mem(tmp, size, elf->sh_addr(elf->elf, i, file));
 }
 
