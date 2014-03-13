@@ -34,6 +34,7 @@ RM		=	rm -f
 
 NM		=	my_nm
 OBJDUMP		=	my_objdump
+NAME			=	NM/OBJDUMP
 
 OBJDIR		=	obj/
 SRCDIR		=	src/
@@ -52,6 +53,12 @@ dummy		:=	$(shell test -d $(OBJDIR) || mkdir -p $(OBJDIR))
 dummy		:=	$(shell test -d $(SRCDIR) || mkdir -p $(SRCDIR))
 dummy		:=	$(shell test -d $(INCDIR) || mkdir -p $(INCDIR))
 
+.PHONY:	all clean fclean re help $(NAME)
+
+$(NAME):	$(OBJDUMP) $(NM)
+
+all:	$(NAME)
+
 $(OBJDIR)%.o:		$(patsubst %.c,${SRCDIR}%.c, %.c)
 			@if [ ! -d $(dir $@) ]; then mkdir -p $(dir $@); fi
 			@echo -e "Compiling $< { $(CFLAGS) }" | sed 's/^-e //' \
@@ -60,8 +67,6 @@ $(OBJDIR)%.o:		$(patsubst %.c,${SRCDIR}%.c, %.c)
 			| sed 's/[{}]/\x1B[34m&\x1B[0m/g' \
 			| sed 's/[─┬─├─└│]/\x1B[35m&\x1B[0m/g'
 			@$(CC) $(CFLAGS) -c $< -o $@
-
-all:	$(OBJDUMP) $(NM)
 
 $(OBJDUMP):	$(OBJOBJDUMP)
 	@echo -e "Linking $@ { $(LDFLAGS) }" | sed 's/^-e //' \
@@ -88,6 +93,3 @@ re:	fclean all
 help:
 	@echo -e "\033[37mTarget available: all, clean, fclean\033[00m" \
 	| sed 's/^-e //'
-
-.PHONY:	all clean fclean re help
-
