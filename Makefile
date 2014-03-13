@@ -5,13 +5,15 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Thu Mar 13 12:04:33 2014 Hugues
+## Last update Thu Mar 13 13:39:05 2014 Hugues
 ##
 
 SRC			=	file.c \
 				dereference.c \
 				section64.c \
+				section32.c \
 				section_spec64.c \
+				section_spec32.c \
 				elf.c
 
 SRCNM		=	nm/main.c

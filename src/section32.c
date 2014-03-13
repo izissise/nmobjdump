@@ -10,27 +10,27 @@
 
 #include "general.h"
 
-void	*get_section_table64(Elf64_Ehdr *elf, t_file *file)
+void	*get_section_table32(Elf32_Ehdr *elf, t_file *file)
 {
-  Elf64_Shdr	*shtable;
+  Elf32_Shdr	*shtable;
 
   shtable = ((size_t)file->data) + deref(&(elf->e_shoff), file);
   return (shtable);
 }
 
-size_t	section_number64(Elf64_Ehdr *elf)
+size_t	section_number32(Elf32_Ehdr *elf)
 {
   return (elf->e_shnum);
 }
 
-void	print_elf_info64(Elf64_Ehdr *elf)
+void	print_elf_info32(Elf32_Ehdr *elf)
 {
   int	flags;
   char	*stuff;
 
   flags = 0x112;
   stuff = "EXEC_P, HAS_SYMS, D_PAGED";
-  printf("architecture: i386:x86-64, flags 0x%08x:\n", flags);
+  printf("architecture: i386, flags 0x%08x:\n", flags);
   printf("%s\n", stuff);
-  printf("start address 0x%016lx\n", elf->e_entry);
+  printf("start address 0x%08x\n", elf->e_entry);
 }

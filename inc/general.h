@@ -41,13 +41,18 @@ int	init_elf(t_elf *elf, t_file *file);
 
 void			*get_section_table64(Elf64_Ehdr *elf, t_file *file);
 size_t		section_number64(Elf64_Ehdr *elf);
-
 size_t		sh_offset64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_size64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_addr64(Elf64_Ehdr *elf, int idx, t_file *file);
 char			*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file);
 void			print_elf_info64(Elf64_Ehdr *elf);
 
-void			print_sh_name64(Elf64_Ehdr *elf, t_file *file);
+void			*get_section_table32(Elf32_Ehdr *elf, t_file *file);
+size_t		section_number32(Elf32_Ehdr *elf);
+size_t		sh_offset32(Elf32_Ehdr *elf, int idx, t_file *file);
+size_t		sh_size32(Elf32_Ehdr *elf, int idx, t_file *file);
+size_t		sh_addr32(Elf32_Ehdr *elf, int idx, t_file *file);
+char			*sh_section_name32(Elf32_Ehdr *elf, int idx, t_file *file);
+void			print_elf_info32(Elf32_Ehdr *elf);
 
 #endif /* !GENERAL_H_INCLUDED */
