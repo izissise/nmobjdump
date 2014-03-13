@@ -12,7 +12,6 @@
 # define OBJDUMP_H_INCLUDED
 
 # include <ctype.h>
-# include <string.h>
 # include "general.h"
 
 # define BYTE_LINE 16
