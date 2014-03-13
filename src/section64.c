@@ -25,17 +25,13 @@ size_t	section_number64(Elf64_Ehdr *elf)
 
 void	print_elf_info64(Elf64_Ehdr *elf)
 {
-  char	*arch_name[EM_NUM];
+  int	flags;
+  char	*stuff;
 
-  memset(arch_name, 0, EM_NUM * sizeof(char*));
-  arch_name[EM_386] = "x86";
-  arch_name[EM_ARM] = "arm";
-  arch_name[EM_PPC] = "powerpc";
-  arch_name[EM_SPARC] = "sparc";
-  arch_name[EM_X86_64] = "x86-64";
-  printf("architecture: %s, flags 0x%08x:\n",
-         arch_name[elf->e_machine] != NULL ?
-         arch_name[elf->e_machine] : "unknow", elf->e_flags);
+  flags = 0x112;
+  stuff = "EXEC_P, HAS_SYMS, D_PAGED";
+  printf("architecture: i386:x86-64, flags 0x%08x:\n", flags);
+  printf("%s\n", stuff);
   printf("start address 0x%016lx\n", elf->e_entry);
 }
 

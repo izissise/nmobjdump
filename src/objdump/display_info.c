@@ -41,7 +41,10 @@ int	display_file(const char *filename)
 
 void	display_file_flags(t_elf *elf, t_file *file)
 {
-  printf("%s:     file format %s\n", file->name, "elf64-x86-64");
+  if (elf->type == ELFCLASS32)
+    printf("%s:     file format %s\n", file->name, "elf32-i386");
+  else
+    printf("%s:     file format %s\n", file->name, "elf64-x86-64");
   elf->print_elf_info(elf->elf);
 }
 

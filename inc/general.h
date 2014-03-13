@@ -17,7 +17,7 @@
 # include <elf.h>
 # include "file.h"
 
-#define IS_32(x, y) ((elf->type == ELFCLASS32) ? (x) : (y))
+# define IS_32(x, y) ((elf->type == ELFCLASS32) ? (x) : (y))
 
 struct		s_elf;
 typedef struct	s_elf t_elf;

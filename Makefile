@@ -5,7 +5,7 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Thu Mar 13 00:35:37 2014 Hugues
+## Last update Thu Mar 13 12:04:33 2014 Hugues
 ##
 
 SRC			=	file.c \
@@ -18,7 +18,7 @@ SRCNM		=	nm/main.c
 
 SRCOBJDUMP	=	objdump/main.c \
 			objdump/dump.c \
-			objdump/display_info.c
+			objdump/display_info.c \
 
 SRCNM		+=	$(SRC)
 SRCOBJDUMP	+=	$(SRC)
@@ -77,7 +77,7 @@ clean:
 fclean:	clean
 	@echo -e "Removing ${NM} ${OBJDUMP} !" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[36m&\x1B[0m/g'
-	@$(RM) $(NM) $(OBJDUMP)
+	@$(RM) $(OBJDUMP) $(NM)
 
 re:	fclean all
 
