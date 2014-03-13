@@ -30,8 +30,8 @@ void	print_elf_info32(Elf32_Ehdr *elf)
 
   types[ET_NONE] = "";
   ftypes[ET_NONE] = 0x0;
-  types[ET_REL] = "";
-  ftypes[ET_REL] = 0x0;
+  types[ET_REL] = "HAS_RELOC, HAS_SYMS";
+  ftypes[ET_REL] = 0x11;
   types[ET_EXEC] = "EXEC_P, HAS_SYMS, D_PAGED";
   ftypes[ET_EXEC] = 0x112;
   types[ET_DYN] = "HAS_SYMS, DYNAMIC, D_PAGED";
