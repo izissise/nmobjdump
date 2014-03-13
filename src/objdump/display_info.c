@@ -10,6 +10,23 @@
 
 #include "objdump.h"
 
+int	section_worth_display(char *name)
+{
+  if (!(!strcmp(name, ".bss")
+        || !strcmp(name, ".shstrtab")
+        || !strcmp(name, ".symtab")
+        || !strcmp(name, ".strtab")
+        || !strcmp(name, ".rela.text")
+        || !strcmp(name, ".data")
+        || !strcmp(name, ".rela.debug_info")
+        || !strcmp(name, ".rela.debug_aranges")
+        || !strcmp(name, ".note.GNU-stack")
+        || !strcmp(name, ".rela.eh_frame")
+        || !strcmp(name, ".rela.debug_line")))
+    return (0);
+  return (1);
+}
+
 int	display_file(const char *filename)
 {
   t_file		file;
@@ -30,9 +47,7 @@ int	display_file(const char *filename)
   while (i < section_number)
     {
       name = elf.sh_section_name(elf.elf, i, &file);
-      if ((name != NULL)
-          && !(!strcmp(name, ".bss") || !strcmp(name, ".shstrtab")
-               || !strcmp(name, ".symtab") || !strcmp(name, ".strtab")))
+      if ((name != NULL) && !section_worth_display(name))
         display_section(&elf, &file, i);
       i++;
     }
@@ -61,3 +76,4 @@ void	display_section(t_elf *elf, t_file *file, int i)
     dump_mem(tmp, elf->sh_size(elf->elf, i, file),
              elf->sh_addr(elf->elf, i, file));
 }
+

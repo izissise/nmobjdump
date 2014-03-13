@@ -30,15 +30,15 @@ void	print_elf_info64(Elf64_Ehdr *elf)
 
   types[ET_NONE] = "";
   ftypes[ET_NONE] = 0x0;
-  types[ET_REL] = "";
-  ftypes[ET_REL] = 0x0;
+  types[ET_REL] = "HAS_RELOC, HAS_SYMS";
+  ftypes[ET_REL] = 0x11;
   types[ET_EXEC] = "EXEC_P, HAS_SYMS, D_PAGED";
   ftypes[ET_EXEC] = 0x112;
   types[ET_DYN] = "HAS_SYMS, DYNAMIC, D_PAGED";
   ftypes[ET_DYN] = 0x150;
   types[ET_CORE] = "";
   ftypes[ET_CORE] = 0x0;
-  printf("architecture: i386, flags 0x%08x:\n", ftypes[elf->e_type]);
+  printf("architecture: i386:x86-64, flags 0x%08x:\n", ftypes[elf->e_type]);
   printf("%s\n", types[elf->e_type]);
   printf("start address 0x%016lx\n", elf->e_entry);
 }
