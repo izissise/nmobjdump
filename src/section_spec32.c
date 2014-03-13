@@ -53,7 +53,7 @@ char			*sh_section_name32(Elf32_Ehdr *elf, int idx, t_file *file)
     return (NULL);
   shstr = &(section_table[elf->e_shstrndx]);
   sectionnames = file->data + shstr->sh_offset;
-  if (sectionnames > file->data + file->size)
+  if ((void*)sectionnames > file->data + file->size)
     return (NULL);
   res = &(sectionnames[section_table[idx].sh_name]);
   if ((void*)res > file->data + file->size)

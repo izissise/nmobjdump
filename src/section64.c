@@ -25,12 +25,20 @@ size_t	section_number64(Elf64_Ehdr *elf)
 
 void	print_elf_info64(Elf64_Ehdr *elf)
 {
-  int	flags;
-  char	*stuff;
+  int	ftypes[ET_NUM];
+  char	*types[ET_NUM];
 
-  flags = 0x112;
-  stuff = "EXEC_P, HAS_SYMS, D_PAGED";
-  printf("architecture: i386:x86-64, flags 0x%08x:\n", flags);
-  printf("%s\n", stuff);
+  types[ET_NONE] = "";
+  ftypes[ET_NONE] = 0x0;
+  types[ET_REL] = "";
+  ftypes[ET_REL] = 0x0;
+  types[ET_EXEC] = "EXEC_P, HAS_SYMS, D_PAGED";
+  ftypes[ET_EXEC] = 0x112;
+  types[ET_DYN] = "HAS_SYMS, DYNAMIC, D_PAGED";
+  ftypes[ET_DYN] = 0x150;
+  types[ET_CORE] = "";
+  ftypes[ET_CORE] = 0x0;
+  printf("architecture: i386, flags 0x%08x:\n", ftypes[elf->e_type]);
+  printf("%s\n", types[elf->e_type]);
   printf("start address 0x%016lx\n", elf->e_entry);
 }
