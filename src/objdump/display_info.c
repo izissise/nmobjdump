@@ -30,13 +30,13 @@ int	display_file(const char *filename)
   while (i < section_number)
     {
       name = elf.sh_section_name(elf.elf, i, &file);
-      if (!(!strcmp(name, ".bss") || !strcmp(name, ".shstrtab")
-            || !strcmp(name, ".symtab") || !strcmp(name, ".strtab")))
+      if ((name != NULL)
+          && !(!strcmp(name, ".bss") || !strcmp(name, ".shstrtab")
+               || !strcmp(name, ".symtab") || !strcmp(name, ".strtab")))
         display_section(&elf, &file, i);
       i++;
     }
-  close_file(&file);
-  return (0);
+  return (close_file(&file));
 }
 
 void	display_file_flags(t_elf *elf, t_file *file)

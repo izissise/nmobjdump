@@ -36,12 +36,12 @@ int	init_elf(t_elf *elf, t_file *file)
   elf->type = ((Elf32_Ehdr*)(elf->elf))->e_ident[EI_CLASS];
   if (!((elf->type == ELFCLASS32) || (elf->type == ELFCLASS64)))
     return (1);
-  elf->get_section_table = IS_32(&get_section_table64, &get_section_table64);
-  elf->section_number = IS_32(&section_number64, &section_number64);
-  elf->sh_offset = IS_32(&sh_offset64, &sh_offset64);
-  elf->sh_size = IS_32(&sh_size64, &sh_size64);
-  elf->sh_addr = IS_32(&sh_addr64, &sh_addr64);
-  elf->sh_section_name = IS_32(&sh_section_name64, &sh_section_name64);
-  elf->print_elf_info = IS_32(&print_elf_info64, &print_elf_info64);
+  elf->get_section_table = IS_32(&get_section_table32, &get_section_table64);
+  elf->section_number = IS_32(&section_number32, &section_number64);
+  elf->sh_offset = IS_32(&sh_offset32, &sh_offset64);
+  elf->sh_size = IS_32(&sh_size32, &sh_size64);
+  elf->sh_addr = IS_32(&sh_addr32, &sh_addr64);
+  elf->sh_section_name = IS_32(&sh_section_name32, &sh_section_name64);
+  elf->print_elf_info = IS_32(&print_elf_info32, &print_elf_info64);
   return (0);
 }

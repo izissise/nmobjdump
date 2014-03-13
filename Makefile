@@ -5,7 +5,7 @@
 ## Login   <moriss_h@epitech.net>
 ##
 ## Started on  Sun Jun  9 03:35:24 2013 Hugues
-## Last update Thu Mar 13 13:39:05 2014 Hugues
+## Last update Thu Mar 13 13:45:29 2014 Hugues
 ##
 
 SRC			=	file.c \
@@ -69,7 +69,7 @@ $(OBJDUMP):	$(OBJOBJDUMP)
 		| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
 		@$(CC) $(LDFLAGS) -o $(OBJDUMP) $(OBJOBJDUMP)
 
-all:	$(OBJDUMP)
+all:	$(OBJDUMP) $(NM)
 
 clean:
 	@echo -e "Removing object !" | sed 's/^-e //' \
