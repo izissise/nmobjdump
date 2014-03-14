@@ -10,6 +10,25 @@
 
 #include "general.h"
 
+int		find_section_type(t_elf *elf, uint32_t type,
+                        int start, t_file *file)
+{
+  uint32_t	tmptype;
+  unsigned int	i;
+  size_t		section_number;
+
+  section_number = elf->section_number(elf->elf);
+  i = start;
+  while (i < section_number)
+    {
+      tmptype = elf->sh_type(elf->elf, i, file);
+      if (tmptype == type)
+        return (i);
+      i++;
+    }
+  return (-1);
+}
+
 int		find_section(t_elf *elf, const char *section, t_file *file)
 {
   char		*tmpname;

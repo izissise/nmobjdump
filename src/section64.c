@@ -40,8 +40,11 @@ void	print_elf_info64(Elf64_Ehdr *elf)
   ftypes[ET_CORE] = 0x0;
   if (elf->e_type < ET_NUM)
     {
-      printf("architecture: i386:x86-64, flags 0x%08x:\n", ftypes[elf->e_type]);
+      printf("architecture: i386:x86-64, flags 0x%08x:\n",
+             ftypes[elf->e_type]);
       printf("%s\n", types[elf->e_type]);
       printf("start address 0x%016lx\n", elf->e_entry);
     }
 }
+
+

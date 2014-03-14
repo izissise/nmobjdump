@@ -13,6 +13,6 @@
 
 # include "general.h"
 
-int	display_file(const char *file);;
+int	display_file(const char *file);
 
 #endif /* !NM_H_INCLUDED */
