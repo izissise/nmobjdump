@@ -15,28 +15,37 @@ int	display_file(const char *filename)
   t_file	file;
   t_elf	elf;
   int	sym;
+  int	j;
   Elf64_Shdr *tab;
-  Elf64_Shdr *tmp;
+  Elf64_Sym *tmp;
 
   if ((open_file(&file, filename, O_RDONLY, 0) == -1)
       || check_valid_elf(&file) || init_elf(&elf, &file))
     return (1);
+  int i = 0;
   elf.elf = file.data;
-  sym = find_section(&elf, ".symtab", &file);
-  if ((sym = (sym == -1) ? find_section(&elf, ".dynsym", &file) : sym) == -1)
+  tab = get_section_table64(elf.elf, &file);
+  sym = 0;
+  j = 0;
+  void *ptr;
+  while ((sym = find_section_type(&elf, SHT_SYMTAB, sym + 1, &file)) != -1)
+    {
+i = 0;
+      tmp = file.data + tab[sym].sh_offset;
+      printf("%p\n", (void*)tab[sym].sh_link);
+      ptr = file.data + tab[sym].sh_link;
+      while (i < 20)
+        {
+          printf("%c", ((char*)(ptr))[i]);
+          i++;
+        }
+
+      j++;
+    }
+  if (j == 0)
     {
       dprintf(STDERR_FILENO, "%s: no symbols\n", filename);
       return (1);
-    }
-  tab = get_section_table64(elf.elf, &file);
-  tmp = file.data + tab[sym].sh_offset;
-  int i = 0;
-  printf("%p\n", (void*)tmp->sh_link);
-  printf("%d\n", tmp->sh_type);
-  while (i < 20)
-    {
-      printf("%c", ((char*)(tmp->sh_link))[i]);
-      i++;
     }
   return (close_file(&file));
 }
