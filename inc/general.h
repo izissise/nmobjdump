@@ -17,6 +17,10 @@
 # include <elf.h>
 # include "file.h"
 
+# define ARCHI64 "architecture: i386:x86-64, flags 0x%08x:\n"
+# define ARCHI32 "architecture: i386, flags 0x%08x:\n"
+# define STARTADDR64 "start address 0x%016lx\n"
+# define STARTADDR32 "start address 0x%08x\n"
 # define IS_32(x, y) ((elf->type == ELFCLASS32) ? (void*)(x) : (void*)(y))
 
 struct		s_elf;
@@ -56,7 +60,7 @@ size_t		section_number32(Elf32_Ehdr *elf);
 size_t		sh_offset32(Elf32_Ehdr *elf, int idx, t_file *file);
 size_t		sh_size32(Elf32_Ehdr *elf, int idx, t_file *file);
 size_t		sh_addr32(Elf32_Ehdr *elf, int idx, t_file *file);
-uint32_t		sh_type32(Elf64_Ehdr *elf, int idx, t_file *file);
+uint32_t		sh_type32(Elf32_Ehdr *elf, int idx, t_file *file);
 char			*sh_section_name32(Elf32_Ehdr *elf, int idx, t_file *file);
 void			print_elf_info32(Elf32_Ehdr *elf);
 
