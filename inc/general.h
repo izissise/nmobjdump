@@ -30,51 +30,53 @@
 struct		s_elf;
 typedef struct	s_elf t_elf;
 
-struct	s_elf
+struct		s_elf
 {
-  int	type;
-  void	*elf;
-  void	*(*get_section_table)();
+  int		type;
+  void		*elf;
+  void		*(*get_section_table)();
   size_t	(*section_number)();
   size_t	(*sh_offset)();
   size_t	(*sh_size)();
   size_t	(*sh_addr)();
   size_t	(*sh_type)();
-  char	*(*sh_section_name)();
-  char	*(*symbols_str)();
-  char	*(*symbol_name)();
-  char	*(*dump_symbol)();
-  void	(*print_elf_info)();
+  char		*(*sh_section_name)();
+  char		*(*symbols_str)();
+  char		*(*symbol_name)();
+  char		*(*dump_symbol)();
+  void		(*print_elf_info)();
 };
 
-void	*deref(void *addr, t_file *file);
-int	check_valid_elf(t_file *file);
-int	init_elf(t_elf *elf, t_file *file);
-int	find_section(t_elf *elf, const char *section, int start, t_file *file);
-int	find_section_type(t_elf *elf, uint32_t type, int start, t_file *file);
+void		*deref(void *addr, t_file *file);
+int		check_valid_elf(t_file *file);
+int		init_elf(t_elf *elf, t_file *file);
+int		find_section(t_elf *elf, const char *section,
+                   int start, t_file *file);
+int		find_section_type(t_elf *elf, uint32_t type,
+                        int start, t_file *file);
 
-void			*get_section_table64(Elf64_Ehdr *elf, t_file *file);
+void		*get_section_table64(Elf64_Ehdr *elf, t_file *file);
 size_t		section_number64(Elf64_Ehdr *elf);
-char			*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file);
-void			dump_symbol64(Elf64_Sym *sym, char *symstr, t_file *file);
-char			*symbol_name64(Elf64_Sym *sym, char *symstr, t_file *file);
+char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file);
+void		dump_symbol64(Elf64_Sym *sym, char *symstr, t_file *file);
+char		*symbol_name64(Elf64_Sym *sym, char *symstr, t_file *file);
 size_t		sh_offset64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_size64(Elf64_Ehdr *elf, int idx, t_file *file);
 size_t		sh_addr64(Elf64_Ehdr *elf, int idx, t_file *file);
-uint32_t		sh_type64(Elf64_Ehdr *elf, int idx, t_file *file);
-char			*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file);
-void			print_elf_info64(Elf64_Ehdr *elf);
+uint32_t	sh_type64(Elf64_Ehdr *elf, int idx, t_file *file);
+char		*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file);
+void		print_elf_info64(Elf64_Ehdr *elf);
 
-void			*get_section_table32(Elf32_Ehdr *elf, t_file *file);
+void		*get_section_table32(Elf32_Ehdr *elf, t_file *file);
 size_t		section_number32(Elf32_Ehdr *elf);
-char			*symbols_str_32(Elf32_Ehdr *elf, int sym, t_file *file);
-char			*symbol_name32(Elf32_Sym *sym, char *symstr, t_file *file);
-void			dump_symbol32(Elf32_Sym *sym, char *symstr, t_file *file);
+char		*symbols_str_32(Elf32_Ehdr *elf, int sym, t_file *file);
+char		*symbol_name32(Elf32_Sym *sym, char *symstr, t_file *file);
+void		dump_symbol32(Elf32_Sym *sym, char *symstr, t_file *file);
 size_t		sh_offset32(Elf32_Ehdr *elf, int idx, t_file *file);
 size_t		sh_size32(Elf32_Ehdr *elf, int idx, t_file *file);
 size_t		sh_addr32(Elf32_Ehdr *elf, int idx, t_file *file);
-uint32_t		sh_type32(Elf32_Ehdr *elf, int idx, t_file *file);
-char			*sh_section_name32(Elf32_Ehdr *elf, int idx, t_file *file);
-void			print_elf_info32(Elf32_Ehdr *elf);
+uint32_t	sh_type32(Elf32_Ehdr *elf, int idx, t_file *file);
+char		*sh_section_name32(Elf32_Ehdr *elf, int idx, t_file *file);
+void		print_elf_info32(Elf32_Ehdr *elf);
 
 #endif /* !GENERAL_H_INCLUDED */
