@@ -14,6 +14,6 @@
 # include "general.h"
 
 int	display_file(const char *file);
-void	sort_symbol(void **syms, t_file *file);
+void	sort_symbol(t_elf *elf, void **syms, char *symstr, t_file *file);
 
 #endif /* !NM_H_INCLUDED */

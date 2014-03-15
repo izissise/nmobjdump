@@ -43,7 +43,7 @@ void	dump_section_symbol(t_elf *elf, int sh, char *symstr, t_file *file)
   i = 0;
   if ((symbols = list_symbols(elf, sh, file)) == NULL)
     return ;
-  sort_symbol(symbols, file);
+  sort_symbol(elf, symbols, symstr, file);
   while (symbols[i])
     {
       elf->dump_symbol(symbols[i], symstr, file);
