@@ -27,6 +27,8 @@ int			check_valid_elf(t_file *file)
       dprintf(STDERR_FILENO, "%s: File format not recognized\n", file->name);
       return (1);
     }
+  if ((elf->e_type == ELFCLASS64) && (file->size < sizeof(Elf64_Ehdr)))
+    return (1);
   return (0);
 }
 

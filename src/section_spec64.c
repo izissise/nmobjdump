@@ -27,7 +27,7 @@ size_t		sh_size64(Elf64_Ehdr *elf, int idx, t_file *file)
 
   if ((section_table = get_section_table64(elf, file)) == NULL)
     return (0);
-  if ((void*)(section_table + idx)  > file->data + file->size)
+  if ((void*)(section_table + idx) > file->data + file->size)
     return (0);
   return (section_table[idx].sh_size);
 }
@@ -38,7 +38,7 @@ size_t		sh_addr64(Elf64_Ehdr *elf, int idx, t_file *file)
 
   if ((section_table = get_section_table64(elf, file)) == NULL)
     return (0);
-  if ((void*)(section_table + idx)  > file->data + file->size)
+  if ((void*)(section_table + idx) > file->data + file->size)
     return (0);
   return (section_table[idx].sh_addr);
 }
@@ -49,7 +49,7 @@ uint32_t		sh_type64(Elf64_Ehdr *elf, int idx, t_file *file)
 
   if ((section_table = get_section_table64(elf, file)) == NULL)
     return (0);
-  if ((void*)(section_table + idx)  > file->data + file->size)
+  if ((void*)(section_table + idx) > file->data + file->size)
     return (0);
   return (section_table[idx].sh_type);
 }
@@ -63,7 +63,7 @@ char			*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file)
 
   if ((section_table = get_section_table64(elf, file)) == NULL)
     return (0);
-  if (((void*)(section_table + idx)  > file->data + file->size)
+  if (((void*)(section_table + idx) > file->data + file->size)
       || (elf->e_shstrndx == SHN_UNDEF))
     return (NULL);
   shstr = &(section_table[elf->e_shstrndx]);

@@ -30,6 +30,8 @@ char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file)
 
   if ((tab = get_section_table64(elf, file)) == NULL)
     return (NULL);
+  if ((void*)(tab + sym) > file->data + file->size)
+    return (NULL);
   res = file->data + (tab[tab[sym].sh_link]).sh_offset;
   return (res);
 }
