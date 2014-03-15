@@ -32,7 +32,11 @@ char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file)
     return (NULL);
   if ((void*)(tab + sym) > file->data + file->size)
     return (NULL);
+  if ((void*)(&(tab[tab[sym].sh_link])) > file->data + file->size)
+    return (NULL);
   res = file->data + (tab[tab[sym].sh_link]).sh_offset;
+  if ((void*)res > file->data + file->size)
+    return (NULL);
   return (res);
 }
 

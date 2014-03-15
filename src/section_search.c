@@ -29,7 +29,8 @@ int		find_section_type(t_elf *elf, uint32_t type,
   return (-1);
 }
 
-int		find_section(t_elf *elf, const char *section, t_file *file)
+int		find_section(t_elf *elf, const char *section,
+                   int start, t_file *file)
 {
   char		*tmpname;
   unsigned int	i;
@@ -38,7 +39,7 @@ int		find_section(t_elf *elf, const char *section, t_file *file)
   if (section == NULL)
     return (-1);
   section_number = elf->section_number(elf->elf);
-  i = 0;
+  i = start;
   while (i < section_number)
     {
       tmpname = elf->sh_section_name(elf->elf, i, file);

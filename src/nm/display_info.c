@@ -16,6 +16,7 @@ int	display_file(const char *filename)
   t_elf	elf;
   int	sym;
   int	j;
+  char	*symstr;
 
   if ((open_file(&file, filename, O_RDONLY, 0) == -1)
       || check_valid_elf(&file) || init_elf(&elf, &file))
@@ -23,8 +24,10 @@ int	display_file(const char *filename)
   elf.elf = file.data;
   sym = 0;
   j = 0;
-  while ((sym = find_section_type(&elf, SHT_SYMTAB, sym + 1, &file)) != -1)
+  while ((sym = find_section(&elf, ".symtab", sym + 1, &file)) != -1)
     {
+      symstr = elf.symbols_str(elf.elf, sym, &file);
+
       j++;
     }
   if (j == 0)
