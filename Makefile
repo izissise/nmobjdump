@@ -19,7 +19,8 @@ SRC			=	file.c \
 				elf.c
 
 SRCNM		=	nm/main.c \
-			nm/display_info.c
+			nm/display_info.c \
+			nm/sort_sym.c
 
 SRCOBJDUMP	=	objdump/main.c \
 			objdump/dump.c \
