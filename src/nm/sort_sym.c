@@ -19,6 +19,15 @@ void	swap(void **a, void **b)
   *b = tmp;
 }
 
+char	*skyp_underscore(char *str)
+{
+  if (str == NULL)
+    return (NULL);
+  while (str[0] == '_')
+    str++;
+  return (str);
+}
+
 void	sort_symbol(t_elf *elf, void **syms, char *symstr, t_file *file)
 {
   int	i;
@@ -33,8 +42,8 @@ void	sort_symbol(t_elf *elf, void **syms, char *symstr, t_file *file)
       i = 1;
       while (syms[i])
         {
-          n1 = elf->symbol_name(syms[i - 1], symstr, file);
-          n2 = elf->symbol_name(syms[i], symstr, file);
+          n1 = skyp_underscore(elf->symbol_name(syms[i - 1], symstr, file));
+          n2 = skyp_underscore(elf->symbol_name(syms[i], symstr, file));
           if ((!n1 && n2) || (n1 && n2 && (strcasecmp(n1, n2) > 0)))
             {
               swap(&syms[i - 1], &syms[i]);

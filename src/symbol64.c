@@ -28,7 +28,7 @@ char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file)
 void		dump_symbol64(Elf64_Sym *sym, char *symstr, t_file *file)
 {
   if (((void*)(symstr + sym->st_name) >= file->data + file->size)
-      || (symstr[sym->st_name] == '\0'))
+      || (sym->st_info == STT_NOTYPE) || (sym->st_info == STT_FILE))
     return ;
   if (sym->st_value)
     printf(DUMPSYM64, sym->st_value, &symstr[sym->st_name]);
