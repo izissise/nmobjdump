@@ -21,10 +21,10 @@
 # define ARCHI32 "architecture: i386, flags 0x%08x:\n"
 # define STARTADDR64 "start address 0x%016lx\n"
 # define STARTADDR32 "start address 0x%08x\n"
-# define DUMPSYM64 "%016lx %s\n"
-# define DUMPSYM32 "%08x %s\n"
-# define DUMPSYMNS64 "                 %s\n"
-# define DUMPSYMNS32 "         %s\n"
+# define DUMPSYM64 "%016lx %c %s\n"
+# define DUMPSYM32 "%08x %c %s\n"
+# define DUMPSYMNS64 "                 %c %s\n"
+# define DUMPSYMNS32 "         %c %s\n"
 # define IS_32(x, y) ((elf->type == ELFCLASS32) ? (void*)(x) : (void*)(y))
 
 struct		s_elf;

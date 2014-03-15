@@ -27,13 +27,17 @@ char		*symbols_str_32(Elf32_Ehdr *elf, int sym, t_file *file)
 
 void		dump_symbol32(Elf32_Sym *sym, char *symstr, t_file *file)
 {
+  char		type;
+
+  type = 'T';
   if (((void*)(symstr + sym->st_name) >= file->data + file->size)
+      || (sym->st_info == STT_NOTYPE) || (sym->st_info == STT_FILE)
       || (symstr[sym->st_name] == '\0'))
     return ;
   if (sym->st_value)
-    printf(DUMPSYM32, sym->st_value, &symstr[sym->st_name]);
+    printf(DUMPSYM32, sym->st_value, type, &symstr[sym->st_name]);
   else
-    printf(DUMPSYMNS32, &symstr[sym->st_name]);
+    printf(DUMPSYMNS32, type, &symstr[sym->st_name]);
 }
 
 char	*symbol_name32(Elf32_Sym *sym, char *symstr, t_file *file)
