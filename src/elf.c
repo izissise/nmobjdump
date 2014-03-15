@@ -41,6 +41,7 @@ int	init_elf(t_elf *elf, t_file *file)
   elf->get_section_table = IS_32(&get_section_table32, &get_section_table64);
   elf->section_number = IS_32(&section_number32, &section_number64);
   elf->symbols_str = IS_32(&symbols_str_32, &symbols_str_64);
+  elf->dump_symbol = IS_32(&dump_symbol32, &dump_symbol64);
   elf->sh_offset = IS_32(&sh_offset32, &sh_offset64);
   elf->sh_size = IS_32(&sh_size32, &sh_size64);
   elf->sh_addr = IS_32(&sh_addr32, &sh_addr64);

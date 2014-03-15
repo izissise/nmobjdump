@@ -10,6 +10,26 @@
 
 #include "nm.h"
 
+void	dump_section_symbol(t_elf *elf, int sh, char *symstr, t_file *file)
+{
+  void	*sect;
+  size_t	size;
+  int	symsize;
+  int	i;
+
+  sect = file->data + elf->sh_offset(elf->elf, sh, file);
+  size = elf->sh_size(elf->elf, sh, file);
+  if ((sect == file->data) || (size == 0))
+    return ;
+  i = 0;
+  symsize = (elf->type == ELFCLASS32) ? sizeof(Elf32_Sym) : sizeof(Elf64_Sym);
+  while ((size_t)(symsize * i) < size)
+    {
+      elf->dump_symbol(sect + (symsize * i), symstr, file);
+      i++;
+    }
+}
+
 int	display_file(const char *filename)
 {
   t_file	file;
@@ -26,8 +46,8 @@ int	display_file(const char *filename)
   j = 0;
   while ((sym = find_section(&elf, ".symtab", sym + 1, &file)) != -1)
     {
-      symstr = elf.symbols_str(elf.elf, sym, &file);
-
+      if ((symstr = elf.symbols_str(elf.elf, sym, &file)) != NULL)
+        dump_section_symbol(&elf, sym, symstr, &file);
       j++;
     }
   if (j == 0)
