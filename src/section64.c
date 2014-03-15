@@ -23,34 +23,6 @@ size_t	section_number64(Elf64_Ehdr *elf)
   return (elf->e_shnum);
 }
 
-char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file)
-{
-  Elf64_Shdr	*tab;
-  char		*res;
-
-  if ((tab = get_section_table64(elf, file)) == NULL)
-    return (NULL);
-  if ((void*)(tab + sym) > file->data + file->size)
-    return (NULL);
-  if ((void*)(&(tab[tab[sym].sh_link])) > file->data + file->size)
-    return (NULL);
-  res = file->data + (tab[tab[sym].sh_link]).sh_offset;
-  if ((void*)res > file->data + file->size)
-    return (NULL);
-  return (res);
-}
-
-void		dump_symbol64(void *addr, char *symstr, t_file *file)
-{
-  Elf64_Sym	*sym;
-
-  sym = addr;
-  if (((void*)(symstr + sym->st_name) >= file->data + file->size)
-      || (symstr[sym->st_name] == '\0'))
-    return ;
-  printf("%ld %s\n", sym->st_value, &symstr[sym->st_name]);
-}
-
 void	print_elf_info64(Elf64_Ehdr *elf)
 {
   int	ftypes[ET_NUM];

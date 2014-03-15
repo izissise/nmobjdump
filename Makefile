@@ -16,6 +16,7 @@ SRC			=	file.c \
 				section_spec32.c \
 				section_search.c \
 				symbol64.c \
+				symbol32.c \
 				elf.c
 
 SRCNM		=	nm/main.c \

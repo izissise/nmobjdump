@@ -10,12 +10,12 @@
 
 #include "general.h"
 
-char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file)
+char		*symbols_str_32(Elf32_Ehdr *elf, int sym, t_file *file)
 {
-  Elf64_Shdr	*tab;
+  Elf32_Shdr	*tab;
   char		*res;
 
-  if (((tab = get_section_table64(elf, file)) == NULL)
+  if (((tab = get_section_table32(elf, file)) == NULL)
       || ((void*)(tab + sym) > file->data + file->size)
       || ((void*)(&(tab[tab[sym].sh_link])) > file->data + file->size))
     return (NULL);
@@ -25,15 +25,15 @@ char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file)
   return (res);
 }
 
-void		dump_symbol64(Elf64_Sym *sym, char *symstr, t_file *file)
+void		dump_symbol32(Elf32_Sym *sym, char *symstr, t_file *file)
 {
   if (((void*)(symstr + sym->st_name) >= file->data + file->size)
       || (symstr[sym->st_name] == '\0'))
     return ;
-  printf("%ld %s\n", sym->st_value, &symstr[sym->st_name]);
+  printf("%d %s\n", sym->st_value, &symstr[sym->st_name]);
 }
 
-char	*symbol_name64(Elf64_Sym *sym, char *symstr, t_file *file)
+char	*symbol_name32(Elf32_Sym *sym, char *symstr, t_file *file)
 {
   if (((void*)(symstr + sym->st_name) >= file->data + file->size)
       || (symstr[sym->st_name] == '\0'))

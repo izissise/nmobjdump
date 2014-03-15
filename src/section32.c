@@ -23,28 +23,6 @@ size_t	section_number32(Elf32_Ehdr *elf)
   return (elf->e_shnum);
 }
 
-char		*symbols_str_32(Elf32_Ehdr *elf, int sym, t_file *file)
-{
-  Elf32_Shdr	*tab;
-  char		*res;
-
-  if ((tab = get_section_table32(elf, file)) == NULL)
-    return (NULL);
-  res = file->data + (tab[tab[sym].sh_link]).sh_offset;
-  return (res);
-}
-
-void		dump_symbol32(void *addr, char *symstr, t_file *file)
-{
-  Elf32_Sym	*sym;
-
-  sym = addr;
-  if (((void*)(symstr + sym->st_name) >= file->data + file->size)
-      || (symstr[sym->st_name] == '\0'))
-    return ;
-  printf("%s\n", &symstr[sym->st_name]);
-}
-
 void	print_elf_info32(Elf32_Ehdr *elf)
 {
   int	ftypes[ET_NUM];
