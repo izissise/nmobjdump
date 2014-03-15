@@ -30,7 +30,10 @@ void		dump_symbol64(Elf64_Sym *sym, char *symstr, t_file *file)
   if (((void*)(symstr + sym->st_name) >= file->data + file->size)
       || (symstr[sym->st_name] == '\0'))
     return ;
-  printf("%ld %s\n", sym->st_value, &symstr[sym->st_name]);
+  if (sym->st_value)
+    printf(DUMPSYM64, sym->st_value, &symstr[sym->st_name]);
+  else
+    printf(DUMPSYMNS64, &symstr[sym->st_name]);
 }
 
 char	*symbol_name64(Elf64_Sym *sym, char *symstr, t_file *file)

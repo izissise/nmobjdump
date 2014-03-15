@@ -55,7 +55,7 @@ dummy		:=	$(shell test -d $(OBJDIR) || mkdir -p $(OBJDIR))
 dummy		:=	$(shell test -d $(SRCDIR) || mkdir -p $(SRCDIR))
 dummy		:=	$(shell test -d $(INCDIR) || mkdir -p $(INCDIR))
 
-.PHONY:	all clean fclean re help $(NAME)
+.PHONY:	all clean fclean re help $(NAME) nm objdump
 
 $(NAME):	$(OBJDUMP) $(NM)
 
@@ -79,6 +79,10 @@ $(NM):	$(OBJNM)
 	@echo -e "Linking $@ { $(LDFLAGS) }" | sed 's/^-e //' \
 	| sed 's/[-a-zA-Z]\+/\x1B[34m&\x1B[0m/g'
 	@$(CC) $(LDFLAGS) -o $(NM) $(OBJNM)
+
+nm:	$(NM)
+
+objdump:	$(OBJDUMP)
 
 clean:
 	@echo -e "Removing object !" | sed 's/^-e //' \

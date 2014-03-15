@@ -30,7 +30,10 @@ void		dump_symbol32(Elf32_Sym *sym, char *symstr, t_file *file)
   if (((void*)(symstr + sym->st_name) >= file->data + file->size)
       || (symstr[sym->st_name] == '\0'))
     return ;
-  printf("%d %s\n", sym->st_value, &symstr[sym->st_name]);
+  if (sym->st_value)
+    printf(DUMPSYM32, sym->st_value, &symstr[sym->st_name]);
+  else
+    printf(DUMPSYMNS32, &symstr[sym->st_name]);
 }
 
 char	*symbol_name32(Elf32_Sym *sym, char *symstr, t_file *file)

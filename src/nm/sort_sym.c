@@ -35,7 +35,7 @@ void	sort_symbol(t_elf *elf, void **syms, char *symstr, t_file *file)
         {
           n1 = elf->symbol_name(syms[i - 1], symstr, file);
           n2 = elf->symbol_name(syms[i], symstr, file);
-          if ((!n1 && n2) || (n1 && n2 && (strcasecmp(n1, n2) < 0)))
+          if ((!n1 && n2) || (n1 && n2 && (strcasecmp(n1, n2) > 0)))
             {
               swap(&syms[i - 1], &syms[i]);
               ok = 1;
