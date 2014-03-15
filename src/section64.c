@@ -48,7 +48,7 @@ void		dump_symbol64(void *addr, char *symstr, t_file *file)
   if (((void*)(symstr + sym->st_name) >= file->data + file->size)
       || (symstr[sym->st_name] == '\0'))
     return ;
-  printf("%s\n", &symstr[sym->st_name]);
+  printf("%ld %s\n", sym->st_value, &symstr[sym->st_name]);
 }
 
 void	print_elf_info64(Elf64_Ehdr *elf)
