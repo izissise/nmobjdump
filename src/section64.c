@@ -23,6 +23,17 @@ size_t	section_number64(Elf64_Ehdr *elf)
   return (elf->e_shnum);
 }
 
+char		*symbols_str_64(Elf64_Ehdr *elf, int sym, t_file *file)
+{
+  Elf64_Shdr	*tab;
+  char		*res;
+
+  if ((tab = get_section_table64(elf, file)) == NULL)
+    return (NULL);
+  res = file->data + (tab[tab[sym].sh_link]).sh_offset;
+  return (res);
+}
+
 void	print_elf_info64(Elf64_Ehdr *elf)
 {
   int	ftypes[ET_NUM];
@@ -40,11 +51,8 @@ void	print_elf_info64(Elf64_Ehdr *elf)
   ftypes[ET_CORE] = 0x0;
   if (elf->e_type < ET_NUM)
     {
-      printf("architecture: i386:x86-64, flags 0x%08x:\n",
-             ftypes[elf->e_type]);
+      printf(ARCHI64, ftypes[elf->e_type]);
       printf("%s\n", types[elf->e_type]);
-      printf("start address 0x%016lx\n", elf->e_entry);
+      printf(STARTADDR64, elf->e_entry);
     }
 }
-
-

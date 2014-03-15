@@ -40,11 +40,11 @@ size_t		sh_addr32(Elf32_Ehdr *elf, int idx, t_file *file)
   return (section_table[idx].sh_addr);
 }
 
-uint32_t		sh_type32(Elf64_Ehdr *elf, int idx, t_file *file)
+uint32_t		sh_type32(Elf32_Ehdr *elf, int idx, t_file *file)
 {
   Elf32_Shdr	*section_table;
 
-  section_table = get_section_table64(elf, file);
+  section_table = get_section_table32(elf, file);
   if ((void*)(section_table + idx)  > file->data + file->size)
     return (0);
   return (section_table[idx].sh_type);

@@ -23,6 +23,17 @@ size_t	section_number32(Elf32_Ehdr *elf)
   return (elf->e_shnum);
 }
 
+char		*symbols_str_32(Elf32_Ehdr *elf, int sym, t_file *file)
+{
+  Elf32_Shdr	*tab;
+  char		*res;
+
+  if ((tab = get_section_table32(elf, file)) == NULL)
+    return (NULL);
+  res = file->data + (tab[tab[sym].sh_link]).sh_offset;
+  return (res);
+}
+
 void	print_elf_info32(Elf32_Ehdr *elf)
 {
   int	ftypes[ET_NUM];
@@ -40,8 +51,8 @@ void	print_elf_info32(Elf32_Ehdr *elf)
   ftypes[ET_CORE] = 0x0;
   if (elf->e_type < ET_NUM)
     {
-      printf("architecture: i386, flags 0x%08x:\n", ftypes[elf->e_type]);
+      printf(ARCHI32, ftypes[elf->e_type]);
       printf("%s\n", types[elf->e_type]);
-      printf("start address 0x%08x\n", elf->e_entry);
+      printf(STARTADDR32, elf->e_entry);
     }
 }
