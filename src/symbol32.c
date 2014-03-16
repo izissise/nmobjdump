@@ -25,7 +25,7 @@ char		*symbols_str_32(Elf32_Ehdr *elf, int sym, t_file *file)
   return (res);
 }
 
-char		symbol_type32(Elf32_Sym *sym, t_file *file)
+char		symbol_type32(Elf32_Sym *sym)
 {
   return ((sym->st_shndx == SHN_ABS) ?
           ((ELF32_ST_BIND(sym->st_info) == STB_GLOBAL) ? 'A' : 'a') :
@@ -39,7 +39,8 @@ char		symbol_type32(Elf32_Sym *sym, t_file *file)
           : ('?'));
 }
 
-void		dump_symbol32(Elf32_Sym *sym, char *symstr, t_file *file)
+void		dump_symbol32(Elf32_Ehdr *elf, Elf32_Sym *sym,
+                      char *symstr, t_file *file)
 {
   char		type;
 
@@ -48,7 +49,8 @@ void		dump_symbol32(Elf32_Sym *sym, char *symstr, t_file *file)
       || (sym->st_info == STT_NOTYPE) || (sym->st_info == STT_FILE)
       || (symstr[sym->st_name] == '\0'))
     return ;
-  type = symbol_type32(sym, file);
+  if ((type = symbol_type32(sym)) == '?')
+    type = symbol_sect_type32(elf, sym, file);
   if (sym->st_value)
     printf(DUMPSYM32, sym->st_value, type, &symstr[sym->st_name]);
   else
