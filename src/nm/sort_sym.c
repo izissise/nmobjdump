@@ -31,12 +31,10 @@ int	strcasecmp_underscore(char *str1, char *str2)
       while (str2[0] == '_')
         str2++;
       a = str1[0];
+      a = (a >= 'A' && a <= 'Z') ? a - 'A' + 'a' : a;
       b = str2[0];
-      if ((a != b
-           && !(
-             ((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z'))
-             && (ABS(a - b) == ABS('a' - 'A'))
-           )))
+      b = (b >= 'A' && b <= 'Z') ? b - 'A' + 'a' : b;
+      if (a != b)
         break;
       str1++;
       str2++;
