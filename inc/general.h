@@ -14,6 +14,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <ctype.h>
 # include <elf.h>
 # include "file.h"
 
@@ -26,6 +27,7 @@
 # define DUMPSYMNS64 "                 %c %s\n"
 # define DUMPSYMNS32 "         %c %s\n"
 # define IS_32(x, y) ((elf->type == ELFCLASS32) ? (void*)(x) : (void*)(y))
+# define ABS(x) ((x < 0) ? -(x) : (x))
 
 struct		s_elf;
 typedef struct	s_elf t_elf;
@@ -67,7 +69,9 @@ size_t		sh_addr64(Elf64_Ehdr *elf, int idx, t_file *file);
 uint32_t	sh_type64(Elf64_Ehdr *elf, int idx, t_file *file);
 char		*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file);
 void		print_elf_info64(Elf64_Ehdr *elf);
-char		symbol_sect_type64(Elf64_Ehdr *elf, Elf64_Sym *sym, t_file *file);
+char		symbol_sect_type64(Elf64_Ehdr *elf, Elf64_Sym *sym,
+                           t_file *file);
+char		symclass_type64(Elf64_Ehdr *elf, Elf64_Sym *sym, t_file *file);
 
 void		*get_section_table32(Elf32_Ehdr *elf, t_file *file);
 size_t		section_number32(Elf32_Ehdr *elf);
@@ -81,6 +85,8 @@ size_t		sh_addr32(Elf32_Ehdr *elf, int idx, t_file *file);
 uint32_t	sh_type32(Elf32_Ehdr *elf, int idx, t_file *file);
 char		*sh_section_name32(Elf32_Ehdr *elf, int idx, t_file *file);
 void		print_elf_info32(Elf32_Ehdr *elf);
-char		symbol_sect_type32(Elf32_Ehdr *elf, Elf32_Sym *sym, t_file *file);
+char		symbol_sect_type32(Elf32_Ehdr *elf, Elf32_Sym *sym,
+                           t_file *file);
+char		symclass_type32(Elf32_Ehdr *elf, Elf32_Sym *sym, t_file *file);
 
 #endif /* !GENERAL_H_INCLUDED */

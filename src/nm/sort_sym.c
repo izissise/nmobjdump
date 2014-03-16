@@ -19,13 +19,29 @@ void	swap(void **a, void **b)
   *b = tmp;
 }
 
-char	*skip_underscore(char *str)
+int	strcasecmp_underscore(char *str1, char *str2)
 {
-  if (str == NULL)
-    return (NULL);
-  while (str[0] == '_')
-    str++;
-  return (str);
+  char	a;
+  char	b;
+
+  while (str1[0] && str2[0])
+    {
+      while (str1[0] == '_')
+        str1++;
+      while (str2[0] == '_')
+        str2++;
+      a = str1[0];
+      b = str2[0];
+      if ((a != b
+           && !(
+             ((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z'))
+             && (ABS(a - b) == ABS('a' - 'A'))
+           )))
+        break;
+      str1++;
+      str2++;
+    }
+  return (a - b);
 }
 
 void	sort_symbol(t_elf *elf, void **syms, char *symstr, t_file *file)
@@ -42,9 +58,9 @@ void	sort_symbol(t_elf *elf, void **syms, char *symstr, t_file *file)
       i = 1;
       while (syms[i])
         {
-          n1 = skip_underscore(elf->symbol_name(syms[i - 1], symstr, file));
-          n2 = skip_underscore(elf->symbol_name(syms[i], symstr, file));
-          if ((!n1 && n2) || (n1 && n2 && (strcasecmp(n1, n2) > 0)))
+          n1 = elf->symbol_name(syms[i - 1], symstr, file);
+          n2 = elf->symbol_name(syms[i], symstr, file);
+          if ((!n1 && n2) || (n1 && n2 && (strcasecmp_underscore(n1, n2) > 0)))
             {
               swap(&syms[i - 1], &syms[i]);
               ok = 1;

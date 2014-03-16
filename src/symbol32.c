@@ -50,7 +50,8 @@ void		dump_symbol32(Elf32_Ehdr *elf, Elf32_Sym *sym,
       || (symstr[sym->st_name] == '\0'))
     return ;
   if ((type = symbol_type32(sym)) == '?')
-    type = symbol_sect_type32(elf, sym, file);
+    if ((type = symbol_sect_type32(elf, sym, file)) == '?')
+      type = symclass_type32(elf, sym, file);
   if (sym->st_value)
     printf(DUMPSYM32, sym->st_value, type, &symstr[sym->st_name]);
   else

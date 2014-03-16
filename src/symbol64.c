@@ -50,7 +50,8 @@ void		dump_symbol64(Elf64_Ehdr *elf, Elf64_Sym *sym,
       || (symstr[sym->st_name] == '\0'))
     return ;
   if ((type = symbol_type64(sym)) == '?')
-    type = symbol_sect_type64(elf, sym, file);
+    if ((type = symbol_sect_type64(elf, sym, file)) == '?')
+      type = symclass_type64(elf, sym, file);
   if (sym->st_value)
     printf(DUMPSYM64, sym->st_value, type, &symstr[sym->st_name]);
   else
