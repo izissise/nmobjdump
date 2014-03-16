@@ -79,11 +79,11 @@ char		symbol_sect_type64(Elf64_Ehdr *elf, Elf64_Sym *sym, t_file *file)
   shlinked = file->data + elf->e_shoff + (elf->e_shentsize * sym->st_shndx);
   if ((void*)shlinked >= file->data + file->size)
     return ('?');
-  return (((shlinked->sh_flags & SHF_EXECINSTR) != 0) ? ('t') :
+  return (((shlinked->sh_flags & SHF_EXECINSTR) != 0) ? ('T') :
           ((shlinked->sh_flags & SHF_ALLOC) != 0
            && shlinked->sh_type != SHT_NOBITS) ?
-          (((shlinked->sh_flags & SHF_WRITE) == 0) ? ('r') : ('d')) :
-          (shlinked->sh_type == SHT_NOBITS) ? ('b') :
+          (((shlinked->sh_flags & SHF_WRITE) == 0) ? ('r') : ('D')) :
+          (shlinked->sh_type == SHT_NOBITS) ? ('B') :
           ((shlinked->sh_type != SHT_NOBITS)
            && ((shlinked->sh_flags & SHF_WRITE) == 0)) ? ('n') : ('?'));
 }
