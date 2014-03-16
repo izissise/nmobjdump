@@ -10,7 +10,7 @@
 
 #include "general.h"
 
-void	*get_section_table64(Elf64_Ehdr *elf, t_file *file)
+void		*get_section_table64(Elf64_Ehdr *elf, t_file *file)
 {
   Elf64_Shdr	*shtable;
 

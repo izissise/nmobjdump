@@ -22,9 +22,9 @@ typedef struct	s_file
 {
   int		fd;
   int		flags;
-  mode_t		mode;
+  mode_t	mode;
   char const	*name;
-  size_t		size;
+  size_t	size;
   void		*data;
 }		t_file;
 

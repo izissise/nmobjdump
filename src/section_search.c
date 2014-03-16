@@ -15,7 +15,7 @@ int		find_section_type(t_elf *elf, uint32_t type,
 {
   uint32_t	tmptype;
   unsigned int	i;
-  size_t		section_number;
+  size_t	section_number;
 
   section_number = elf->section_number(elf->elf);
   i = start;
@@ -34,7 +34,7 @@ int		find_section(t_elf *elf, const char *section,
 {
   char		*tmpname;
   unsigned int	i;
-  size_t		section_number;
+  size_t	section_number;
 
   if (section == NULL)
     return (-1);

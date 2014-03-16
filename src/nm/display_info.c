@@ -10,13 +10,13 @@
 
 #include "nm.h"
 
-void	**list_symbols(t_elf *elf, int sh, t_file *file)
+void		**list_symbols(t_elf *elf, int sh, t_file *file)
 {
-  void	**res;
-  void	*sect;
+  void		**res;
+  void		*sect;
   size_t	size;
-  int	symsize;
-  int	i;
+  int		symsize;
+  int		i;
 
   sect = file->data + elf->sh_offset(elf->elf, sh, file);
   size = elf->sh_size(elf->elf, sh, file);
@@ -52,13 +52,13 @@ void	dump_section_symbol(t_elf *elf, int sh, char *symstr, t_file *file)
   free(symbols);
 }
 
-int	display_file(const char *filename)
+int		display_file(const char *filename)
 {
   t_file	file;
-  t_elf	elf;
-  int	sym;
-  int	j;
-  char	*symstr;
+  t_elf		elf;
+  int		sym;
+  int		j;
+  char		*symstr;
 
   if ((open_file(&file, filename, O_RDONLY, 0) == -1)
       || check_valid_elf(&file) || init_elf(&elf, &file))

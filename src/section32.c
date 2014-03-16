@@ -10,7 +10,7 @@
 
 #include "general.h"
 
-void	*get_section_table32(Elf32_Ehdr *elf, t_file *file)
+void		*get_section_table32(Elf32_Ehdr *elf, t_file *file)
 {
   Elf32_Shdr	*shtable;
 

@@ -45,7 +45,7 @@ size_t		sh_addr64(Elf64_Ehdr *elf, int idx, t_file *file)
 
 uint32_t		sh_type64(Elf64_Ehdr *elf, int idx, t_file *file)
 {
-  Elf64_Shdr	*section_table;
+  Elf64_Shdr		*section_table;
 
   if ((section_table = get_section_table64(elf, file)) == NULL)
     return (0);
@@ -54,7 +54,7 @@ uint32_t		sh_type64(Elf64_Ehdr *elf, int idx, t_file *file)
   return (section_table[idx].sh_type);
 }
 
-char			*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file)
+char		*sh_section_name64(Elf64_Ehdr *elf, int idx, t_file *file)
 {
   char		*res;
   Elf64_Shdr	*section_table;

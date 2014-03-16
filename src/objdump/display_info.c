@@ -27,11 +27,11 @@ int	section_worth_display(char *name)
   return (1);
 }
 
-int	display_file(const char *filename)
+int		display_file(const char *filename)
 {
-  t_file		file;
+  t_file	file;
   t_elf		elf;
-  size_t		section_number;
+  size_t	section_number;
   char		*name;
   unsigned int	i;
 
@@ -63,10 +63,10 @@ void	display_file_flags(t_elf *elf, t_file *file)
   elf->print_elf_info(elf->elf);
 }
 
-void	display_section(t_elf *elf, t_file *file, int i)
+void		display_section(t_elf *elf, t_file *file, int i)
 {
-  void	*tmp;
-  char	*name;
+  void		*tmp;
+  char		*name;
   size_t	size;
 
   size = elf->sh_size(elf->elf, i, file);
@@ -78,4 +78,3 @@ void	display_section(t_elf *elf, t_file *file, int i)
   if (tmp + size <= file->data + file->size)
     dump_mem(tmp, size, elf->sh_addr(elf->elf, i, file));
 }
-
